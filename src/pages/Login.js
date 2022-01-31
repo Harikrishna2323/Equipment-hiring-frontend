@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 //authentication
 import { authenticate, isAuth } from "../helpers/helpers";
@@ -57,15 +58,13 @@ export default function Login() {
   const [user, setUser] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://hkb-rentals.herokuapp.com/api/auth/login",
-        { email, password }
-      );
+      const res = await axios.post("/api/auth/login", { email, password });
       authenticate(res, () => {
         setUser(res.data.user);
       });
