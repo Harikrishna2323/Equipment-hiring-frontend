@@ -16,14 +16,18 @@ import EditVehicle from "./pages/EditVehicle";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
-          <Route exact path="/" element={<Home />} />
+          <Route
+            exact
+            path="/"
+            element={user ? <Home /> : <Navigate to="/login" />}
+          />
           <Route exact path="/user-bookings" element={<UserBookings />} />
           <Route exact path="/booking/:id" element={<Booking />} />
 

@@ -5,7 +5,10 @@ export const bookVehicle = (reqObj) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const { data } = await axios.post(`/api/bookings/book`, reqObj);
+    const { data } = await axios.post(
+      `https://hkb-rentals.herokuapp.com/api/bookings/book`,
+      reqObj
+    );
     toast.success("Your car is booked successfully.");
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {
@@ -19,7 +22,9 @@ export const getAllBookings = () => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const { data } = await axios.get("/api/bookings/getallbookings");
+    const { data } = await axios.get(
+      "https://hkb-rentals.herokuapp.com/api/bookings/getallbookings"
+    );
     dispatch({ type: "GET_ALL_BOOKINGS", payload: data });
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {

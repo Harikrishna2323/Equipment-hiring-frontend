@@ -5,7 +5,9 @@ export const getAllVehicles = () => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const { data } = await axios.get("/api/vehicles/get-vehicles");
+    const { data } = await axios.get(
+      "https://hkb-rentals.herokuapp.com/api/vehicles/get-vehicles"
+    );
     dispatch({ type: "GET_ALL_VEHICLES", payload: data.vehicles });
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {
@@ -18,7 +20,10 @@ export const addVehicle = (reqObj) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    await axios.post("/api/vehicles/create", reqObj);
+    await axios.post(
+      "https://hkb-rentals.herokuapp.com/api/vehicles/create",
+      reqObj
+    );
 
     dispatch({ type: "LOADING", payload: false });
     toast.success("New vehicle added successfully");
@@ -35,7 +40,10 @@ export const editVehicle = (reqObj) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    await axios.post("/api/vehicles/editvehicle", reqObj);
+    await axios.post(
+      "https://hkb-rentals.herokuapp.com/api/vehicles/editvehicle",
+      reqObj
+    );
 
     dispatch({ type: "LOADING", payload: false });
     toast.success("Details updated successfully");

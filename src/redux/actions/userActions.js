@@ -4,7 +4,10 @@ import { toast } from "react-toastify";
 export const userLogin = (email, password) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
   try {
-    const { data } = await axios.post("/api/auth/login", { email, password });
+    const { data } = await axios.post(
+      "https://hkb-rentals.herokuapp.com/api/auth/login",
+      { email, password }
+    );
     toast.success("Login success.");
     localStorage.setItem("user", JSON.stringify(data.user));
   } catch (error) {
@@ -18,11 +21,14 @@ export const userRegister = (username, email, password) => async (dispatch) => {
   dispatch({ type: "LOADING", payload: true });
 
   try {
-    const { data } = await axios.post("/api/auth/register", {
-      username,
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      "https://hkb-rentals.herokuapp.com/api/auth/register",
+      {
+        username,
+        email,
+        password,
+      }
+    );
     toast.success("Register success.");
     dispatch({ type: "LOADING", payload: false });
   } catch (error) {
